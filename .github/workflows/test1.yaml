@@ -38,19 +38,23 @@ jobs:
       #     sudo apt-get update
       #     sudo apt-get install -y python3 python3-pip
       #     pip install checkov=='3.2.70'
-      - name: Set up Python build environment
+      - name: Install Python3 and pip
         run: |
-          sudo apt update
-          sudo apt install -y build-essential libssl-dev zlib1g-dev \
-            libbz2-dev libreadline-dev libsqlite3-dev curl \
-            libncursesw5-dev xz-utils tk-dev libxml2-dev \
-            libxmlsec1-dev libffi-dev liblzma-dev
+          sudo apt-get install -y python3 python3-pip
+          python3 --version
+          pip3 --version
+      # - name: Set up Python build environment
+      #   run: |
+      #     sudo apt update
+      #     sudo apt install -y build-essential libssl-dev zlib1g-dev \
+      #       libbz2-dev libreadline-dev libsqlite3-dev curl \
+      #       libncursesw5-dev xz-utils tk-dev libxml2-dev \
+      #       libxmlsec1-dev libffi-dev liblzma-dev
 
       - name: dev-plan-network
         uses: gruntwork-io/terragrunt-action@v2
         env:
           INPUT_PRE_EXEC_1: |
-            mise use --global python@3.11.4 --verbose
             mise use -g checkov@3.2.70
         with:
           tf_version: '1.5.7'
