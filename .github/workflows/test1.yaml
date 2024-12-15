@@ -43,8 +43,8 @@ jobs:
         uses: gruntwork-io/terragrunt-action@v2
         env:
           INPUT_PRE_EXEC_1: |
-            mise use -g python@$latest
-            mise use -g checkov@${{ env.checkov_version }}
+            mise use --global python@3.11.4
+            mise use -g checkov@3.2.70
         with:
           tf_version: '1.5.7'
           tg_version: '0.53.2'
