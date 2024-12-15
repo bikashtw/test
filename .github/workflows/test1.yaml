@@ -33,16 +33,18 @@ jobs:
       #     tg_version: '0.53.2'
       #     tg_command: 'version'
 
+      - name: Debug and Install Python/Checkov (Optional)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3 python3-pip
+          pip install checkov=='3.2.70'
+
       - name: dev-plan-network
-        continue-on-error: false
         uses: gruntwork-io/terragrunt-action@v2
-        env:
-          INPUT_PRE_EXEC_1: |
-            mise use -g python@3.11 --verbose
-            mise use -g checkov@3.2.70 --verbose
         with:
           tf_version: '1.5.7'
           tg_version: '0.53.2'
+          tg_dir: ./environments/dev
           tg_command: 'version' 
 
       # Step 2: Update system packages
