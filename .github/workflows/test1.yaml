@@ -38,11 +38,18 @@ jobs:
       #     sudo apt-get update
       #     sudo apt-get install -y python3 python3-pip
       #     pip install checkov=='3.2.70'
-      - name: Install Python3 and pip
+      - name: Install and Activate Mise
         run: |
-          sudo apt-get install -y python3 python3-pip
-          python3 --version
-          pip3 --version
+          set -e
+          curl https://mise.run | sh
+          echo 'eval "$(/root/.local/bin/mise activate bash)"' >> ~/.bashrc
+          source ~/.bashrc
+          
+      # - name: Install Python3 and pip
+      #   run: |
+      #     sudo apt-get install -y python3 python3-pip
+      #     python3 --version
+      #     pip3 --version
       # - name: Set up Python build environment
       #   run: |
       #     sudo apt update
